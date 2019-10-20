@@ -160,6 +160,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="ColorDetector.h" />
+    <ClInclude Include="Helpers.h" />
     <ClInclude Include="ParticleStar.h" />
     <ClInclude Include="ParticleSystem.h" />
     <ClInclude Include="pch.h" />

@@ -11,7 +11,7 @@
 #include "ColorDetector.h"
 #include "opencv2/highgui/highgui.hpp"
 #include "opencv2/imgproc/imgproc.hpp"
-
+#include "Helpers.h"
 int main()
 {
 	cv::setUseOptimized(true);
@@ -87,12 +87,17 @@ int main()
 		detector.set_hsv(high_h, high_s, high_v, low_h, low_s, low_v);
 
 		std::tuple<int, int> coords = detector.make_image_moments(detected_colors);
-		
+		if (is_outside_tolerance(coords, old_pos, 10))
+		{
+			particleSystem.setPosition(std::get<0>(old_pos), std::get<1>(old_pos));
+			particleSystem.fuel(10);
+		}
+
 		if(coords != old_pos)
 		{
 			old_pos = coords;
-			particleSystem.fuel(10);
 		}
+
 		while (window.pollEvent(events))
 		{
 			switch (events.type)
@@ -110,7 +115,6 @@ int main()
 				break;
 			}
 		}
-		particleSystem.setPosition(std::get<0>(coords), std::get<1>(coords));
 		particleSystem.update();
 		text.setString(particleSystem.getNumberOfParticlesString());
 		window.clear(sf::Color::Black);
