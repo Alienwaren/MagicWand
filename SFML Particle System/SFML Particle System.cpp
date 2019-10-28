@@ -20,7 +20,7 @@ int main()
 	cv::VideoCapture cap(0);
 	cap.set(cv::CAP_PROP_FRAME_WIDTH, 1280);
 	cap.set(cv::CAP_PROP_FRAME_HEIGHT, 720);
-	cap.set(cv::CAP_PROP_FPS, 60);
+	cap.set(cv::CAP_PROP_FPS, 30);
 	int low_h = 19;
 	int high_h = 94;
 
@@ -49,7 +49,7 @@ int main()
 	const int width = 1280;
 	const int height = 720;
 
-	sf::RenderWindow window(sf::VideoMode(width, height, 32), "Inside the Particle Storm");
+	sf::RenderWindow window(sf::VideoMode(width, height, 32), "Magic");
 	window.setVerticalSyncEnabled(true);
 	sf::Event events;
 	sf::Font font;

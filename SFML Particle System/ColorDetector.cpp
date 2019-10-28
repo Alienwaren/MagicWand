@@ -15,7 +15,6 @@ cv::Mat ColorDetector::detect_color(const cv::Mat frame)
 	cv::Mat hsv_frame_thresholded;
 	cvtColor(frame, hsv_frame, cv::COLOR_BGR2HSV);
 	inRange(hsv_frame, cv::Scalar(h_l_, s_l_, v_l_), cv::Scalar(h_, s_, v_), hsv_frame_thresholded);
-
 	//morphological opening (remove small objects from the foreground)
 	erode(hsv_frame_thresholded, hsv_frame_thresholded, getStructuringElement(cv::MORPH_ELLIPSE, cv::Size(5, 5)));
 	dilate(hsv_frame_thresholded, hsv_frame_thresholded, getStructuringElement(cv::MORPH_ELLIPSE, cv::Size(5, 5)));
@@ -23,7 +22,7 @@ cv::Mat ColorDetector::detect_color(const cv::Mat frame)
 	//morphological closing (fill small holes in the foreground)
 	dilate(hsv_frame_thresholded, hsv_frame_thresholded, getStructuringElement(cv::MORPH_ELLIPSE, cv::Size(5, 5)));
 	erode(hsv_frame_thresholded, hsv_frame_thresholded, getStructuringElement(cv::MORPH_ELLIPSE, cv::Size(5, 5)));
-
+	cv::imshow("test", hsv_frame_thresholded);
 	return hsv_frame_thresholded;
 }
 
